@@ -5,6 +5,8 @@ __pycache__/
 env/
 venv/
 tabfm/
+outputs/
+data/
 *.gguf
 *.bin
 *.pt

@@ -15,40 +15,68 @@ A visually streamlined, end-to-end tool blending **TabFM** (Tabular Foundation M
 
 ## 🛠️ Tech Stack
 *   🧠 **Core ML:** `TabFM` (PyTorch)
-*   🤖 **Local LLM:** `Ollama` (`qwen3:4b` - zero temp/fast inference)
-*   🖥️ **Frontend:** `Streamlit` 
+*   🤖 **Local LLM:** `Ollama` (`qwen3:4b`)
+*   🖥️ **Frontend:** `Streamlit`
 *   💾 **Data:** `pandas` & `numpy`
+*   📈 **Charts:** `plotly`
+*   🖨️ **PDF Export:** `reportlab`
 
 ## 📂 Files
 *   📄 **`README.md`**: Project overview and setup.
 *   🐍 **`app.py`**: Streamlit UI, TabFM engine, and Ollama integration.
-*   📦 **`requirements.txt`**: Minimal Python dependencies.
-*   📝 **`outputs.md` / `ideal_outputs.md`**: Auto-generated, identically matched markdown logs of your predictions and AI insights.
+*   📦 **`requirements.txt`**: Python dependencies.
+*   📝 **`outputs.md`**: Auto-generated markdown log of latest predictions and insights.
 
 ---
 
 ## 🚀 Setup & Execution
 
-Copy-paste these commands directly into Windows PowerShell:
+Copy-paste these commands directly into terminal (PowerShell/Bash):
 
 **1. Install Core Dependencies**
-```powershell
+```bash
 git clone https://github.com/google-research/tabfm.git
 cd tabfm
 pip install -e .[pytorch]
-pip install streamlit pandas numpy requests
+cd ..
+pip install -r requirements.txt
 ollama pull qwen3:4b
 ```
 
 **2. Run Application**
-```powershell
+```bash
 streamlit run app.py
 ```
 
-**3. Quick Test (Headless)**
-```powershell
-python -c "from tabfm import tabfm_v1_0_0_pytorch; print('TabFM loaded successfully')"
+If Streamlit watcher causes reload issues in your environment:
+```bash
+streamlit run app.py --server.fileWatcherType none
 ```
+
+**3. Quick Test (Headless)**
+```bash
+python3 -c "from tabfm import tabfm_v1_0_0_pytorch as b; b.load(); print('TabFM loaded successfully')"
+```
+
+---
+
+## ✅ Implemented Upgrades
+1. 📁 **Batch Upload:** CSV support for bulk processing.
+2. 🎛️ **Model Selector:** UI dropdown for discovered local Ollama models.
+3. 🖨️ **PDF Export:** Download AI insights instantly.
+4. 📈 **Dynamic Charts:** Plotly visual metrics for predictions and confidence.
+
+## 📁 Usage Modes
+
+### CSV Upload
+- Upload 1 training CSV (includes target column) and 1 test CSV.
+- Select target column and run prediction.
+- Get predictions, confidence, charts, Ollama insight, and PDF export.
+
+### Batch Upload
+- Upload 1 training CSV and multiple test CSV files.
+- Fit once and predict each test file.
+- Download per-file predictions and batch PDF summary.
 
 ---
 
@@ -59,12 +87,12 @@ python -c "from tabfm import tabfm_v1_0_0_pytorch; print('TabFM loaded successfu
 4. 🏥 **Medical Triage:** Classify patient risk levels from health records.
 5. 📦 **Inventory Forecasting:** Predict stock needs using historical inputs.
 
-## 🔮 5 Future Upgrades
-1. 📁 **Batch Upload:** CSV support for bulk processing.
-2. 🎛️ **Model Selector:** UI dropdown for various Ollama models.
-3. 🖨️ **PDF Export:** Download AI insights instantly.
-4. 📈 **Dynamic Charts:** Plotly integration for visual metrics.
-5. ⚡ **JAX Support:** Toggle PyTorch/JAX backends directly in UI.
+## 🔗 References
+- Tutorial video: https://youtu.be/8QEAUtSoVgA
+- Google Research blog: https://research.google/blog/introducing-tabfm-a-zero-shot-foundation-model-for-tabular-data/
+- TabFM repository: https://github.com/google-research/tabfm
+- TabFM classifier internals: https://raw.githubusercontent.com/google-research/tabfm/main/tabfm/src/classifier_and_regressor.py
+- Ollama API tags endpoint: https://docs.ollama.com/api/tags
 
 ---
 
